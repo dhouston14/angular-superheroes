@@ -1,12 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="PhoneBookApp">
 <head>
   <meta charset="UTF-8">
   <title>Superhero Phone Book</title>
   <link rel="stylesheet" href="style.css">
-</head>
-<body>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
   <script src="app.js"></script>
+</head>
+
+<body ng-controller="PhoneBookCtrl as access" style="background-color: grey">
+
+  <h2>Superhero Phonebook mane...</h2>
+
+  Search Hero: <input type="text" ng-model="query" placeholder="Search" /><br>
+  <div class="{{list.affiliation}}" ng-repeat="list in access.phoneBookNumbers | filter: query">
+    <h3>{{$index + 1}}. {{list.name}} - {{list.affiliation}}</h3>
+      <p>{{list.phonenumber}}</p>
+      <button type="button" ng-click="image = !image" >Show/Hideo Kojima Hero</button><br>
+      <img ng-show="image" ng-src="{{list.image_url}}"/>
+  </div>
+<br>
+  New Name: <input type="text" ng-model="access.newphoneBookNumbers.name"><br>
+  New Number: <input type="text" ng-model="access.newphoneBookNumbers.phonenumber"><br>
+  New Affiliation: <input type="text" ng-model="access.newphoneBookNumbers.affiliation"><br>
+  New Image: <input type="text" ng-model="access.newphoneBookNumbers.image_url"><br>
+  <br>
+  <button ng-click="access.NewHero()">Add Hero</button>
+
+  <p>(ADD Name): {{access.newphoneBookNumbers.name}}</p>
+  <p>(ADD Phone Number): {{access.newphoneBookNumbers.phonenumber}}</p>
+  <p>(ADD Affiliation): {{access.newphoneBookNumbers.affiliation}}</p>
+  <p>(ADD Image): {{access.newphoneBookNumbers.image_url}}</p>
+
+
 </body>
 </html>
